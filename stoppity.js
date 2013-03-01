@@ -1,3 +1,4 @@
+// remove script tags matching the following patterns
 var rx1 = new RegExp('wp-content/plugins/pippity');
 var rx2 = new RegExp('clickfuse.com');
 
@@ -8,21 +9,22 @@ for (scr in sc) {
 }
 
 var classes = [
-	'popup-dom-lightbox-wrapper',	//popup domination
-	'jqmWindow'				//jqm ads
+	'popup-dom-lightbox-wrapper',	// popup domination
+	'jqmWindow'				        // jqm ads
 ];
 var ids = [
-	'pty_pkg',				//pippity poppity
-	'mod_wrapper',			//modal wrapper
-	'AdSpotMovie',			//AdSpot
-	'shortTail_D30_modal'	//short tail
+	'pty_pkg',				        // pippity poppity
+	'mod_wrapper',			        // modal wrapper
+	'AdSpotMovie',			        // AdSpot
+	'shortTail_D30_modal'	        // short tail
 ];
 var childids = [
-	'rm_modal',				//ringtone maker
+	'rm_modal',				        // ringtone maker
 ];
 
 window.setInterval (function () {
 
+    // check for the specified IDs and kill them
 	for (id=0; id<ids.length; id++) {
 		var el = window.document.getElementById(ids[id]);
 		if (el) {
@@ -30,7 +32,7 @@ window.setInterval (function () {
 			chrome.extension.sendRequest ({'type':ids[id]}, function(response){} );
 		}
 	}
-
+    // kill anything containing the specified child ID
 	for (id=0; id<childids.length; id++) {
 		var el = window.document.getElementById(childids[id]);
 		if (el) {
@@ -39,7 +41,7 @@ window.setInterval (function () {
 			chrome.extension.sendRequest ({'type':childids[id]}, function(response){} );
 		}
 	}
-
+    // kill anything with the specified CSS class
 	for (cl=0; cl<classes.length; cl++) {
 		var nodes = window.document.getElementsByClassName(classes[cl]);
 		for (i=0; i<nodes.length; i++) {
@@ -49,4 +51,3 @@ window.setInterval (function () {
 	}
 
 }, 500);
-
